@@ -41,7 +41,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Conjuration",
-    "class": "Sorcerer, Wizard"
+    "class": "Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Aganazzar's Scorcher",
@@ -689,7 +689,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Warlock, Wizard"
+    "class": "Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Branding Smite",
@@ -1362,7 +1362,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Conjuration",
-    "class": "Druid, Sorcerer, Warlock, Wizard"
+    "class": "Druid, Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Create Food and Water",
@@ -1487,7 +1487,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Bard, Sorcerer, Wizard"
+    "class": "Bard, Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Darkness",
@@ -2367,7 +2367,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Wizard"
+    "class": "Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Fire Shield",
@@ -2608,7 +2608,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Druid, Sorcerer, Warlock, Wizard"
+    "class": "Druid, Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Gaseous Form",
@@ -2823,7 +2823,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Warlock, Wizard"
+    "class": "Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Guardian of Faith",
@@ -2869,7 +2869,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Divination",
-    "class": "Cleric, Druid"
+    "class": "Cleric, Druid, Artificer"
   },
   {
     "name": "Guiding Bolt",
@@ -3541,7 +3541,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Bard, Cleric, Sorcerer, Wizard"
+    "class": "Bard, Cleric, Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Lightning Arrow",
@@ -3588,7 +3588,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Warlock, Wizard"
+    "class": "Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Locate Animals or Plants",
@@ -3694,7 +3694,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Conjuration",
-    "class": "Bard, Sorcerer, Warlock, Wizard"
+    "class": "Bard, Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Magic Circle",
@@ -3769,7 +3769,7 @@
     "casting_time": "1 bonus action",
     "level": "Cantrip",
     "school": "Transmutation",
-    "class": "Druid, Warlock"
+    "class": "Druid, Warlock, Artificer"
   },
   {
     "name": "Magic Weapon",
@@ -3957,7 +3957,7 @@
     "casting_time": "1 minute",
     "level": "Cantrip",
     "school": "Transmutation",
-    "class": "Cleric, Bard, Druid, Sorcerer, Wizard"
+    "class": "Cleric, Bard, Druid, Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Message",
@@ -3972,7 +3972,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Transmutation",
-    "class": "Bard, Sorcerer, Wizard"
+    "class": "Bard, Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Meteor Swarm",
@@ -4453,7 +4453,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Conjuration",
-    "class": "Sorcerer, Warlock, Wizard"
+    "class": "Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Polymorph",
@@ -4541,7 +4541,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Transmutation",
-    "class": "Bard, Sorcerer, Warlock, Wizard"
+    "class": "Bard, Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Primordial Ward",
@@ -4761,7 +4761,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Wizard"
+    "class": "Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Ray of Sickness",
@@ -4835,7 +4835,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Abjuration",
-    "class": "Cleric, Druid"
+    "class": "Cleric, Druid, Artificer"
   },
   {
     "name": "Resurrection",
@@ -5148,7 +5148,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Sorcerer, Wizard"
+    "class": "Sorcerer, Wizard, Artificer"
   },
   {
     "name": "Silence",
@@ -5291,7 +5291,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Necromancy",
-    "class": "Cleric"
+    "class": "Cleric, Artificer"
   },
   {
     "name": "Speak with Animals",
@@ -5578,7 +5578,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Conjuration",
-    "class": "Sorcerer, Warlock, Wizard"
+    "class": "Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Symbol",
@@ -5714,7 +5714,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Transmutation",
-    "class": "Druid"
+    "class": "Druid, Artificer"
   },
   {
     "name": "Thunderous Smite",
@@ -5742,7 +5742,7 @@
     "casting_time": "1 action",
     "level": "Cantrip",
     "school": "Evocation",
-    "class": "Bard, Druid, Sorcerer, Warlock, Wizard"
+    "class": "Bard, Druid, Sorcerer, Warlock, Wizard, Artificer"
   },
   {
     "name": "Thunderwave",

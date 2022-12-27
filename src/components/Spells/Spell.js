@@ -10,7 +10,8 @@ export const Spell = ({
   duration,
   range,
   level,
-  displayExtraSpellInfo,
+  displayLevelInfo,
+  displayClassesInfo,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,14 +38,14 @@ export const Spell = ({
           <div>
             <b>Duration:</b> {duration}
           </div>
-          {displayExtraSpellInfo && (
+          {displayLevelInfo && (
             <div>
-              <div>
-                <b>Level:</b> {level}
-              </div>
-              <div>
-                <b>Classes:</b> {classes}
-              </div>
+              <b>Level:</b> {level}
+            </div>
+          )}
+          {displayClassesInfo && (
+            <div>
+              <b>Classes:</b> {classes}
             </div>
           )}
 

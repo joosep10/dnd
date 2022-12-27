@@ -6,26 +6,29 @@ export const Spells = () => {
   const [spells, setSpells] = useState(null);
   const [casterClass, setCasterClass] = useState('');
   const [level, setLevel] = useState('');
-  const [displayExtraSpellInfo, setDisplayExtraSpellInfo] = useState(true);
+  const [displayLevelInfo, setDisplayLevelInfo] = useState(true);
+  const [displayClassesInfo, setDisplayClassesInfo] = useState(true);
 
   const levelChange = levelId => {
     if (levelId) {
       if (levelId === level) {
         setLevel('');
-        setDisplayExtraSpellInfo(true);
+        setDisplayLevelInfo(true);
       } else {
         setLevel(levelId);
-        setDisplayExtraSpellInfo(false);
+        setDisplayLevelInfo(false);
       }
     } else {
-      setDisplayExtraSpellInfo(true);
+      setDisplayLevelInfo(true);
     }
   };
   const casterClassChange = c => {
     if (c === casterClass) {
+      setDisplayClassesInfo(true);
       setCasterClass('');
     } else {
       setCasterClass(c);
+      setDisplayClassesInfo(false);
     }
   };
   const casterClasses = [
@@ -113,7 +116,8 @@ export const Spells = () => {
                 concentration={spell.concentration}
                 school={spell.school}
                 classes={spell.class}
-                displayExtraSpellInfo={displayExtraSpellInfo}
+                displayLevelInfo={displayLevelInfo}
+                displayClassesInfo={displayClassesInfo}
               />
             ))}
         </div>

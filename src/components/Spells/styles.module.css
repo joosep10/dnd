@@ -1,21 +1,20 @@
 .main {
   width: 100%;
   max-width: 1000px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-  /* padding: 20px; */
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
   box-sizing: border-box;
-  min-height: 100vh;
 }
 .spells {
-  width: 80%;
+  grid-area: main;
 }
 .spell {
   width: 100%;
-  padding: 20px 20px 0 0;
+  padding: 0 20px 20px 0;
   box-sizing: border-box;
 }
 .spellName {
@@ -27,18 +26,18 @@ ul {
   list-style: none;
 }
 .classFilter {
-  margin: 0 0 20px 0;
+  grid-area: header;
+  margin: 0 0 40px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
 }
 .classFilter .filter {
-  flex: 1;
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  padding: 10px;
 }
 .filter {
   cursor: pointer;
@@ -66,14 +65,24 @@ ul {
 }
 
 .levelFilter {
-  width: 20%;
-  max-width: 200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
 }
 .levelFilter .filter {
   margin-bottom: 10px;
   padding: 10px 20px;
+}
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchFilter {
+  margin: 0 0 10px 0;
+  width: 70%;
+  height: 25px;
+  font-size: 1rem;
 }

@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Spell, AnyFilter } from 'components';
 
 export const Spells = () => {
@@ -8,7 +8,24 @@ export const Spells = () => {
   const [level, setLevel] = useState('');
   const [displayLevelInfo, setDisplayLevelInfo] = useState(true);
   const [displayClassesInfo, setDisplayClassesInfo] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const searchInputRef = useRef(null);
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeydown, true);
+  }, []);
+  const handleKeydown = e => {
+    if (e.key === 'Escape') {
+      if (document.activeElement === searchInputRef.current) {
+        setSearchTerm('');
+        setCasterClass('');
+        setLevel('');
+        setDisplayLevelInfo(true);
+        setDisplayClassesInfo(true);
+      }
+      searchInputRef.current.focus();
+    }
+  };
   const levelChange = levelId => {
     if (levelId) {
       if (levelId === level) {
@@ -44,15 +61,15 @@ export const Spells = () => {
   ];
   const levels = [
     { id: 'Cantrip', name: 'Cantrip' },
-    { id: '1st-level', name: '1st Level' },
-    { id: '2nd-level', name: '2nd Level' },
-    { id: '3rd-level', name: '3rd Level' },
-    { id: '4th-level', name: '4th Level' },
-    { id: '5th-level', name: '5th Level' },
-    { id: '6th-level', name: '6th Level' },
-    { id: '7th-level', name: '7th Level' },
-    { id: '8th-level', name: '8th Level' },
-    { id: '9th-level', name: '9th Level' },
+    { id: '1st-level', name: '1st' },
+    { id: '2nd-level', name: '2nd' },
+    { id: '3rd-level', name: '3rd' },
+    { id: '4th-level', name: '4th' },
+    { id: '5th-level', name: '5th' },
+    { id: '6th-level', name: '6th' },
+    { id: '7th-level', name: '7th' },
+    { id: '8th-level', name: '8th' },
+    { id: '9th-level', name: '9th' },
   ];
   useEffect(() => {
     fetch('./spells.json', {
@@ -62,11 +79,9 @@ export const Spells = () => {
       },
     })
       .then(response => {
-        console.log('Response: ', response);
         return response.json();
       })
       .then(myJson => {
-        console.log(myJson[0]);
         setSpells(myJson);
       });
   }, []);
@@ -84,15 +99,23 @@ export const Spells = () => {
             />
           ))}
         </div>
-        <div className={styles.levelFilter}>
-          {levels.map(l => (
-            <AnyFilter
-              key={l.id}
-              name={l.name}
-              handleClick={() => levelChange(l.id)}
-              isActive={level === l.id}
-            />
-          ))}
+        <div className={styles.sidebar}>
+          <input
+            className={styles.searchFilter}
+            ref={searchInputRef}
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
+          <div className={styles.levelFilter}>
+            {levels.map(l => (
+              <AnyFilter
+                key={l.id}
+                name={l.name}
+                handleClick={() => levelChange(l.id)}
+                isActive={level === l.id}
+              />
+            ))}
+          </div>
         </div>
         <div className={styles.spells}>
           {spells
@@ -101,7 +124,10 @@ export const Spells = () => {
                 (spell.level === level || level === '') &&
                 spell.class
                   .toLowerCase()
-                  .includes(casterClass.toLowerCase()),
+                  .includes(casterClass.toLowerCase()) &&
+                spell.name
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()),
             )
             .map(spell => (
               <Spell
@@ -109,7 +135,7 @@ export const Spells = () => {
                 name={spell.name}
                 description={spell.desc}
                 castingTime={spell.casting_time}
-                level={spell.level}
+                level={levels.find(l => l.id === spell.level).name}
                 range={spell.range}
                 duration={spell.duration}
                 components={spell.components}

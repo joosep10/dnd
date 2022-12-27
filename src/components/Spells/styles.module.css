@@ -1,0 +1,50 @@
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  /* padding: 20px; */
+  box-sizing: border-box;
+}
+.spell {
+  background-color: white;
+  width: 100%;
+  padding: 20px 20px 0 0;
+  box-sizing: border-box;
+}
+.spellName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+}
+.classFilter {
+  margin: 0;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.classFilter .casterClass {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.classFilter .casterClass.active {
+  background-color: rgb(222, 196, 0);
+}
+.spellDetails {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(236, 236, 236);
+}
+.spellDetails > * {
+  margin-bottom: 10px;
+}

@@ -14,7 +14,11 @@ export const Spell = ({
 
   return (
     <div className={styles.spell}>
-      <div className={styles.spellName} onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className={styles.spellName}
+        onClick={() => setIsOpen(!isOpen)}
+        style={{ textDecoration: isOpen && 'underline' }}
+      >
         {name}
       </div>
       {isOpen && (

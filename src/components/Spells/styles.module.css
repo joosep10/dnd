@@ -1,14 +1,19 @@
 .main {
   width: 100%;
+  max-width: 1000px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
-  background-color: white;
+  align-content: flex-start;
   /* padding: 20px; */
   box-sizing: border-box;
+  min-height: 100vh;
+}
+.spells {
+  width: 80%;
 }
 .spell {
-  background-color: white;
   width: 100%;
   padding: 20px 20px 0 0;
   box-sizing: border-box;
@@ -22,18 +27,23 @@ ul {
   list-style: none;
 }
 .classFilter {
-  margin: 0;
-  padding: 20px 0;
+  margin: 0 0 20px 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%;
 }
-.classFilter .casterClass {
-  padding: 10px 20px;
+.classFilter .filter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+.filter {
   cursor: pointer;
 }
-
-.classFilter .casterClass.active {
+.filter.active {
   background-color: var(--yellow);
 }
 .spellDetails {
@@ -46,9 +56,24 @@ ul {
   background-color: var(--yellow);
 }
 .spellDetails > * {
-  margin-bottom: 10px;
   line-height: 1.6rem;
   font-size: 1.1rem;
 }
+.spellDetails > *:last-child {
+  margin-top: 10px;
+}
 .spellDetails p {
+}
+
+.levelFilter {
+  width: 20%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.levelFilter .filter {
+  margin-bottom: 10px;
+  padding: 10px 20px;
 }

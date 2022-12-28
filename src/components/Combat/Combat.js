@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import { Card } from './Card';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { EditableTextField } from 'EditableTextField';
 
 export const Combat = () => {
@@ -38,7 +38,7 @@ export const Combat = () => {
     );
   };
   const removePlayer = id => {
-    setPlayers(players => players.filter(player => player.id != id));
+    setPlayers(players => players.filter(player => player.id !== id));
   };
   const addPlayer = () => {
     setPlayers([

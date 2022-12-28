@@ -1,5 +1,4 @@
 import styles from './styles.module.css';
-import { useState } from 'react';
 import { DoubleClickInput } from './DoubleClickInput';
 
 export const Card = ({
@@ -10,14 +9,9 @@ export const Card = ({
   updateName,
   onRemoveClick,
 }) => {
-  const [nameInputDisabled, setNameInputDisabled] = useState(true);
-
   const handleKeyDown = e => {
     const { key } = e;
     if (key === 'Enter') updateInitiative(id, e);
-  };
-  const nameInputEnable = e => {
-    console.log('nameInputEnable e: ', e);
   };
   const currentBackground = initiative < 10 ? styles.low : '';
 

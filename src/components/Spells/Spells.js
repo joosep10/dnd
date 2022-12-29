@@ -2,6 +2,25 @@ import styles from './styles.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { Spell, AnyFilter } from 'components';
 
+/*
+fetch spells
+spells, filteredSpells
+spell = {
+  ...details,
+  isOpen,
+}
+filterSpells() {
+
+}
+filter = {casterClass, spellLevel, searchTerm}
+
+ac
+filter has history:
+spells > 1. filter applied > 2. filter applied
+addFilter(){}
+removeFilter(){}
+
+*/
 export const Spells = () => {
   const [spells, setSpells] = useState(null);
   const [casterClass, setCasterClass] = useState('');
@@ -38,6 +57,7 @@ export const Spells = () => {
     } else {
       setDisplayLevelInfo(true);
     }
+    window.scrollTo(0, 0);
   };
   const casterClassChange = c => {
     if (c === casterClass) {
@@ -47,29 +67,30 @@ export const Spells = () => {
       setCasterClass(c);
       setDisplayClassesInfo(false);
     }
+    window.scrollTo(0, 0);
   };
   const casterClasses = [
-    'Artificer',
-    'Bard',
-    'Cleric',
-    'Druid',
-    'Paladin',
-    'Ranger',
-    'Sorcerer',
-    'Warlock',
-    'Wizard',
+    { id: 'Artificer', name: 'Ar' },
+    { id: 'Bard', name: 'Ba' },
+    { id: 'Cleric', name: 'Cl' },
+    { id: 'Druid', name: 'Dr' },
+    { id: 'Paladin', name: 'Pa' },
+    { id: 'Ranger', name: 'Ra' },
+    { id: 'Sorcerer', name: 'So' },
+    { id: 'Warlock', name: 'Wa' },
+    { id: 'Wizard', name: 'Wi' },
   ];
   const levels = [
-    { id: 'Cantrip', name: 'Cantrip' },
-    { id: '1st-level', name: '1st' },
-    { id: '2nd-level', name: '2nd' },
-    { id: '3rd-level', name: '3rd' },
-    { id: '4th-level', name: '4th' },
-    { id: '5th-level', name: '5th' },
-    { id: '6th-level', name: '6th' },
-    { id: '7th-level', name: '7th' },
-    { id: '8th-level', name: '8th' },
-    { id: '9th-level', name: '9th' },
+    { id: 'Cantrip', name: '0' },
+    { id: '1st-level', name: '1' },
+    { id: '2nd-level', name: '2' },
+    { id: '3rd-level', name: '3' },
+    { id: '4th-level', name: '4' },
+    { id: '5th-level', name: '5' },
+    { id: '6th-level', name: '6' },
+    { id: '7th-level', name: '7' },
+    { id: '8th-level', name: '8' },
+    { id: '9th-level', name: '9' },
   ];
   useEffect(() => {
     fetch('./spells.json', {
@@ -88,64 +109,68 @@ export const Spells = () => {
 
   if (spells) {
     return (
-      <div className={styles.main}>
-        <div className={styles.classFilter}>
-          {casterClasses.map(c => (
-            <AnyFilter
-              key={c}
-              name={c}
-              handleClick={() => casterClassChange(c)}
-              isActive={casterClass === c}
+      <div className={styles.mainWrapper}>
+        <div className={styles.headerWrapper}>
+          <div className={styles.header}>
+            <div className={styles.classFilter}>
+              {casterClasses.map(c => (
+                <AnyFilter
+                  key={c.id}
+                  name={c.name}
+                  handleClick={() => casterClassChange(c.id)}
+                  isActive={casterClass === c.id}
+                />
+              ))}
+            </div>
+            <div className={styles.levelFilter}>
+              {levels.map(l => (
+                <AnyFilter
+                  key={l.id}
+                  name={l.name}
+                  handleClick={() => levelChange(l.id)}
+                  isActive={level === l.id}
+                />
+              ))}
+            </div>
+            <input
+              className={styles.searchFilter}
+              ref={searchInputRef}
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
             />
-          ))}
-        </div>
-        <div className={styles.sidebar}>
-          <input
-            className={styles.searchFilter}
-            ref={searchInputRef}
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-          <div className={styles.levelFilter}>
-            {levels.map(l => (
-              <AnyFilter
-                key={l.id}
-                name={l.name}
-                handleClick={() => levelChange(l.id)}
-                isActive={level === l.id}
-              />
-            ))}
           </div>
         </div>
-        <div className={styles.spells}>
-          {spells
-            .filter(
-              spell =>
-                (spell.level === level || level === '') &&
-                spell.class
-                  .toLowerCase()
-                  .includes(casterClass.toLowerCase()) &&
-                spell.name
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase()),
-            )
-            .map(spell => (
-              <Spell
-                key={spell.name}
-                name={spell.name}
-                description={spell.desc}
-                castingTime={spell.casting_time}
-                level={levels.find(l => l.id === spell.level).name}
-                range={spell.range}
-                duration={spell.duration}
-                components={spell.components}
-                concentration={spell.concentration}
-                school={spell.school}
-                classes={spell.class}
-                displayLevelInfo={displayLevelInfo}
-                displayClassesInfo={displayClassesInfo}
-              />
-            ))}
+        <div className={styles.main}>
+          <div className={styles.spells}>
+            {spells
+              .filter(
+                spell =>
+                  (spell.level === level || level === '') &&
+                  spell.class
+                    .toLowerCase()
+                    .includes(casterClass.toLowerCase()) &&
+                  spell.name
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()),
+              )
+              .map(spell => (
+                <Spell
+                  key={spell.name}
+                  name={spell.name}
+                  description={spell.desc}
+                  castingTime={spell.casting_time}
+                  level={levels.find(l => l.id === spell.level).name}
+                  range={spell.range}
+                  duration={spell.duration}
+                  components={spell.components}
+                  concentration={spell.concentration}
+                  school={spell.school}
+                  classes={spell.class}
+                  displayLevelInfo={displayLevelInfo}
+                  displayClassesInfo={displayClassesInfo}
+                />
+              ))}
+          </div>
         </div>
       </div>
     );

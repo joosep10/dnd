@@ -1,5 +1,6 @@
 :root {
   --yellow: rgb(255, 217, 103);
+  --background: rgb(255, 255, 255);
 }
 
 html {
@@ -27,4 +28,6 @@ code {
 }
 div {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }

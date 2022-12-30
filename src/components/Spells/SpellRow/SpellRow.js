@@ -39,6 +39,9 @@ export const SpellRow = ({ data, handleClick, isOpen }) => {
           <div>
             <b>Classes:</b> {data.class}
           </div>
+          <div className={styles.school}>
+            <b>Duration:</b> {data.school}
+          </div>
 
           <div
             className={styles.description}

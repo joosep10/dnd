@@ -40,7 +40,7 @@ export const SpellRow = ({ data, handleClick, isOpen }) => {
             <b>Classes:</b> {data.class}
           </div>
           <div className={styles.school}>
-            <b>Duration:</b> {data.school}
+            <b>School:</b> {data.school}
           </div>
 
           <div

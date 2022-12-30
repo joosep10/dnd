@@ -1,9 +1,9 @@
 import styles from './styles.module.css';
 
-export const SpellRow = ({ data, onClick, isOpen }) => {
+export const SpellRow = ({ data, handleClick, isOpen }) => {
   return (
-    <div id={data.name} className={styles.spellRow} onClick={onClick}>
-      <div className={styles.essential}>
+    <div id={data.name} className={styles.spellRow}>
+      <div className={styles.essential} onClick={handleClick}>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.details}>
           <div>{data.casting_time}</div>

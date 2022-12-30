@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import { SpellRow } from 'components';
 import { useState, useEffect } from 'react';
 
-export const SpellList = ({ data }) => {
+export const SpellList = ({ data, rowOpenSideEffects }) => {
   const [openRow, setOpenRow] = useState(null);
 
   // if only one spell in list open it up
@@ -13,12 +13,16 @@ export const SpellList = ({ data }) => {
 
   // scroll opened row into view
   useEffect(() => {
-    if (openRow)
-      document.getElementById(openRow).scrollIntoView({
-        block: 'start',
-        inline: 'nearest',
-        behaviour: 'smooth',
-      });
+    if (openRow) {
+      rowOpenSideEffects();
+      if (data.length > 1) {
+        document.getElementById(openRow).scrollIntoView({
+          block: 'start',
+          inline: 'nearest',
+          behaviour: 'smooth',
+        });
+      }
+    }
   }, [openRow]);
 
   const handleRowClick = name => {
@@ -34,7 +38,7 @@ export const SpellList = ({ data }) => {
           <SpellRow
             key={spell.name}
             data={spell}
-            onClick={() => handleRowClick(spell.name)}
+            handleClick={() => handleRowClick(spell.name)}
             isOpen={spell.name === openRow}
           />
         );

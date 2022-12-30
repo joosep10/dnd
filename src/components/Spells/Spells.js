@@ -130,6 +130,9 @@ export const Spells = () => {
     };
   }, []);
 
+  const rowOpenSideEffects = () => {
+    searchInputRef.current.blur();
+  };
   if (spells) {
     return (
       <div className={styles.main}>
@@ -147,7 +150,7 @@ export const Spells = () => {
             />
             <input
               id="searchInput"
-              autocomplete="off"
+              autoComplete="off"
               className={styles.searchFilter}
               ref={searchInputRef}
               onChange={debouncedChangeHandler}
@@ -156,7 +159,11 @@ export const Spells = () => {
         </div>
         <div className={styles.body}>
           <div className={styles.container}>
-            <SpellList key="spellList" data={filterSpells()} />
+            <SpellList
+              key="spellList"
+              data={filterSpells()}
+              rowOpenSideEffects={rowOpenSideEffects}
+            />
           </div>
         </div>
       </div>

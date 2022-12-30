@@ -1,20 +1,19 @@
 import styles from './styles.module.css';
-import { useState } from 'react';
 
-export const Spell = ({ data, onClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+export const SpellRow = ({ data, onClick, isOpen }) => {
   return (
-    <div className={styles.spell}>
-      <div
-        className={styles.spellName}
-        onClick={() => setIsOpen(!isOpen)}
-        style={{ textDecoration: isOpen && 'underline' }}
-      >
-        {data.name}
+    <div className={styles.spellRow} onClick={onClick}>
+      <div className={styles.essential}>
+        <div className={styles.name}>{data.name}</div>
+        <div className={styles.details}>
+          <div>{data.casting_time}</div>
+          <div>{data.duration}</div>
+          <div>{data.range}</div>
+          <div>{data.school}</div>
+        </div>
       </div>
       {isOpen && (
-        <div className={styles.spellDetails}>
+        <div className={styles.extra}>
           <div>
             <b>Casting Time:</b> {data.casting_time}
           </div>

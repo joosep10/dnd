@@ -1,0 +1,21 @@
+.options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.option {
+  padding: 10px 10px;
+  font-size: 1rem;
+  height: 2.4rem;
+  cursor: pointer;
+}
+.option:first-child {
+  padding-left: 0;
+}
+.option:last-child {
+  padding-right: 0;
+}
+.option.active {
+  border-bottom: 3px solid var(--yellow);
+}

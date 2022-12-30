@@ -1,0 +1,36 @@
+.spellRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(217, 217, 217);
+}
+.essential {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  cursor: pointer;
+}
+.name {
+  font-weight: 600;
+}
+.details {
+  display: flex;
+  justify-content: flex-end;
+}
+.details > div {
+  display: flex;
+  justify-content: flex-start;
+  width: 160px;
+}
+.extra {
+  padding: 26px 20px;
+  margin: 20px 0;
+  width: 100%;
+  background: white;
+}
+.extra > div {
+  line-height: 1.6rem;
+}

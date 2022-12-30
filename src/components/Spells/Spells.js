@@ -1,74 +1,61 @@
 import styles from './styles.module.css';
-import { useState, useEffect, useRef } from 'react';
-import { Spell, AnyFilter } from 'components';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Options } from 'components';
+import { SpellList } from './SpellList';
+import { fuzzyTestMatch, mySort } from 'helpers/helpers';
+import dottle from 'lodash.debounce';
 
-/*
-fetch spells
-spells, filteredSpells
-spell = {
-  ...details,
-  isOpen,
-}
-filterSpells() {
-
-}
-filter = {casterClass, spellLevel, searchTerm}
-
-ac
-filter has history:
-spells > 1. filter applied > 2. filter applied
-addFilter(){}
-removeFilter(){}
-
-*/
 export const Spells = () => {
   const [spells, setSpells] = useState(null);
-  const [casterClass, setCasterClass] = useState('');
-  const [level, setLevel] = useState('');
-  const [displayLevelInfo, setDisplayLevelInfo] = useState(true);
-  const [displayClassesInfo, setDisplayClassesInfo] = useState(true);
+  const [casterClass, setCasterClass] = useState(null);
+  const [level, setLevel] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const searchInputRef = useRef(null);
 
+  // listen to escape key press
   useEffect(() => {
     document.addEventListener('keydown', handleKeydown, true);
   }, []);
   const handleKeydown = e => {
     if (e.key === 'Escape') {
       if (document.activeElement === searchInputRef.current) {
-        setSearchTerm('');
-        setCasterClass('');
-        setLevel('');
-        setDisplayLevelInfo(true);
-        setDisplayClassesInfo(true);
+        setSearchTerm(null);
+        document.getElementById('searchInput').value = '';
+        // setCasterClass('');
+        // setLevel('');
+        // setDisplayLevelInfo(true);
+        // setDisplayClassesInfo(true);
       }
       searchInputRef.current.focus();
     }
   };
-  const levelChange = levelId => {
-    if (levelId) {
-      if (levelId === level) {
-        setLevel('');
-        setDisplayLevelInfo(true);
-      } else {
-        setLevel(levelId);
-        setDisplayLevelInfo(false);
-      }
-    } else {
-      setDisplayLevelInfo(true);
-    }
-    window.scrollTo(0, 0);
-  };
-  const casterClassChange = c => {
-    if (c === casterClass) {
-      setDisplayClassesInfo(true);
-      setCasterClass('');
-    } else {
-      setCasterClass(c);
-      setDisplayClassesInfo(false);
-    }
-    window.scrollTo(0, 0);
-  };
+
+  //
+  // const levelChange = levelId => {
+  //   if (levelId) {
+  //     if (levelId === level) {
+  //       setLevel('');
+  //       setDisplayLevelInfo(true);
+  //     } else {
+  //       setLevel(levelId);
+  //       setDisplayLevelInfo(false);
+  //     }
+  //   } else {
+  //     setDisplayLevelInfo(true);
+  //   }
+  //   window.scrollTo(0, 0);
+  // };
+  // const casterClassChange = c => {
+  //   if (c === casterClass) {
+  //     setDisplayClassesInfo(true);
+  //     setCasterClass('');
+  //   } else {
+  //     setCasterClass(c);
+  //     setDisplayClassesInfo(false);
+  //   }
+  //   window.scrollTo(0, 0);
+  // };
+
   const casterClasses = [
     { id: 'Artificer', name: 'Ar' },
     { id: 'Bard', name: 'Ba' },
@@ -92,6 +79,8 @@ export const Spells = () => {
     { id: '8th-level', name: '8' },
     { id: '9th-level', name: '9' },
   ];
+
+  // fetch spells
   useEffect(() => {
     fetch('./spells.json', {
       headers: {
@@ -107,69 +96,66 @@ export const Spells = () => {
       });
   }, []);
 
+  // filter spells
+  const filterSpells = () => {
+    let filteredSpells = [...spells];
+    if (casterClass) {
+      filteredSpells = filteredSpells.filter(spell =>
+        spell.class.includes(casterClass),
+      );
+    }
+    if (level) {
+      filteredSpells = filteredSpells.filter(
+        spell => spell.level === level,
+      );
+    }
+    if (searchTerm) {
+      filteredSpells = filteredSpells.filter(spell =>
+        fuzzyTestMatch(spell.name.toLowerCase(), searchTerm.toLowerCase()),
+      );
+      mySort(filteredSpells, searchTerm.toLowerCase());
+    }
+    return filteredSpells;
+  };
+
+  // to keep the  debounced function alive - useCallback
+  const debouncedChangeHandler = useCallback(
+    dottle(e => setSearchTerm(e.target.value), 300),
+    [],
+  );
+  // cleanup the debounced function when component umounts
+  useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    };
+  }, []);
+
   if (spells) {
     return (
-      <div className={styles.mainWrapper}>
-        <div className={styles.headerWrapper}>
-          <div className={styles.header}>
-            <div className={styles.classFilter}>
-              {casterClasses.map(c => (
-                <AnyFilter
-                  key={c.id}
-                  name={c.name}
-                  handleClick={() => casterClassChange(c.id)}
-                  isActive={casterClass === c.id}
-                />
-              ))}
-            </div>
-            <div className={styles.levelFilter}>
-              {levels.map(l => (
-                <AnyFilter
-                  key={l.id}
-                  name={l.name}
-                  handleClick={() => levelChange(l.id)}
-                  isActive={level === l.id}
-                />
-              ))}
-            </div>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <div className={styles.container}>
+            <Options
+              key="casterClassesOptions"
+              data={casterClasses}
+              onChange={id => setCasterClass(id)}
+            />
+            <Options
+              key="levelOptions"
+              data={levels}
+              onChange={id => setLevel(id)}
+            />
             <input
+              id="searchInput"
               className={styles.searchFilter}
               ref={searchInputRef}
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
+              onChange={debouncedChangeHandler}
             />
           </div>
         </div>
-        <div className={styles.main}>
-          <div className={styles.spells}>
-            {spells
-              .filter(
-                spell =>
-                  (spell.level === level || level === '') &&
-                  spell.class
-                    .toLowerCase()
-                    .includes(casterClass.toLowerCase()) &&
-                  spell.name
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase()),
-              )
-              .map(spell => (
-                <Spell
-                  key={spell.name}
-                  name={spell.name}
-                  description={spell.desc}
-                  castingTime={spell.casting_time}
-                  level={levels.find(l => l.id === spell.level).name}
-                  range={spell.range}
-                  duration={spell.duration}
-                  components={spell.components}
-                  concentration={spell.concentration}
-                  school={spell.school}
-                  classes={spell.class}
-                  displayLevelInfo={displayLevelInfo}
-                  displayClassesInfo={displayClassesInfo}
-                />
-              ))}
+        <div className={styles.body}>
+          <div className={styles.container}>
+            <SpellList key="spellList" data={filterSpells()} />
           </div>
         </div>
       </div>

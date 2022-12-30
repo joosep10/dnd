@@ -147,6 +147,7 @@ export const Spells = () => {
             />
             <input
               id="searchInput"
+              autocomplete="off"
               className={styles.searchFilter}
               ref={searchInputRef}
               onChange={debouncedChangeHandler}

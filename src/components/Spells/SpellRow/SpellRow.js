@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 
 export const SpellRow = ({ data, onClick, isOpen }) => {
   return (
-    <div className={styles.spellRow} onClick={onClick}>
+    <div id={data.name} className={styles.spellRow} onClick={onClick}>
       <div className={styles.essential}>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.details}>
@@ -10,21 +10,28 @@ export const SpellRow = ({ data, onClick, isOpen }) => {
           <div>{data.duration}</div>
           <div>{data.range}</div>
           <div>{data.school}</div>
+          <div className={styles.concentrationColumn}>
+            {data.concentration === 'yes' && 'c'}
+          </div>
         </div>
       </div>
       {isOpen && (
         <div className={styles.extra}>
-          <div>
+          <div className={styles.showOnSmallScreen}>
             <b>Casting Time:</b> {data.casting_time}
           </div>
-          <div>
+          <div className={styles.showOnSmallScreen}>
             <b>Range:</b> {data.range}
           </div>
+          <div className={styles.showOnSmallScreen}>
+            <b>Duration:</b> {data.duration}
+          </div>
+          <div className={styles.showOnSmallScreen}>
+            <b>Concentration:</b> {data.concentration}
+          </div>
+
           <div>
             <b>Components:</b> {data.components}
-          </div>
-          <div>
-            <b>Duration:</b> {data.duration}
           </div>
           <div>
             <b>Level:</b> {data.level}
@@ -37,6 +44,15 @@ export const SpellRow = ({ data, onClick, isOpen }) => {
             className={styles.description}
             dangerouslySetInnerHTML={{ __html: data.desc }}
           />
+          {data.higher_level && (
+            <div>
+              <b>Higher levels:</b>
+              <span
+                className={styles.description}
+                dangerouslySetInnerHTML={{ __html: data.higher_level }}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

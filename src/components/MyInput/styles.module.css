@@ -1,0 +1,51 @@
+.inputWrapper {
+  position: relative;
+  width: 80px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 6px;
+}
+.inputWrapper.active {
+  width: 200px;
+}
+input {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 5px;
+  font-size: 1rem;
+  padding-left: 10px;
+}
+.closeIcon {
+  z-index: 100;
+  cursor: pointer;
+  display: none;
+  fill: #939393;
+}
+.active .closeIcon {
+  display: block;
+}
+input:focus {
+  outline: none !important;
+  border: 1px solid var(--yellow);
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(192, 192, 192);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(192, 192, 192);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(192, 192, 192);
+}

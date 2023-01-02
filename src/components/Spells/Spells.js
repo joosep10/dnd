@@ -1,15 +1,17 @@
 import styles from './styles.module.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Options } from 'components';
-import { SpellList } from './SpellList';
+import { MyInput, Options, SpellList, SpellSlots } from 'components';
 import { fuzzyTestMatch, mySort } from 'helpers/helpers';
-import dottle from 'lodash.debounce';
+import { RxTable } from 'react-icons/rx';
+import debounce from 'lodash.debounce';
+import { IconContext } from 'react-icons';
 
 export const Spells = () => {
   const [spells, setSpells] = useState(null);
   const [casterClass, setCasterClass] = useState(null);
   const [level, setLevel] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [tablesOn, setTablesOn] = useState(false);
   const searchInputRef = useRef(null);
 
   // listen to escape key press
@@ -20,42 +22,13 @@ export const Spells = () => {
     if (e.key === 'Escape') {
       if (document.activeElement === searchInputRef.current) {
         setSearchTerm(null);
-        document.getElementById('searchInput').value = '';
-        // setCasterClass('');
-        // setLevel('');
-        // setDisplayLevelInfo(true);
-        // setDisplayClassesInfo(true);
+        searchInputRef.current.value = '';
       }
       searchInputRef.current.focus();
     }
   };
 
-  //
-  // const levelChange = levelId => {
-  //   if (levelId) {
-  //     if (levelId === level) {
-  //       setLevel('');
-  //       setDisplayLevelInfo(true);
-  //     } else {
-  //       setLevel(levelId);
-  //       setDisplayLevelInfo(false);
-  //     }
-  //   } else {
-  //     setDisplayLevelInfo(true);
-  //   }
-  //   window.scrollTo(0, 0);
-  // };
-  // const casterClassChange = c => {
-  //   if (c === casterClass) {
-  //     setDisplayClassesInfo(true);
-  //     setCasterClass('');
-  //   } else {
-  //     setCasterClass(c);
-  //     setDisplayClassesInfo(false);
-  //   }
-  //   window.scrollTo(0, 0);
-  // };
-
+  // constants
   const casterClasses = [
     { id: 'Artificer', name: 'Ar' },
     { id: 'Bard', name: 'Ba' },
@@ -120,7 +93,7 @@ export const Spells = () => {
 
   // to keep the  debounced function alive - useCallback
   const debouncedChangeHandler = useCallback(
-    dottle(e => setSearchTerm(e.target.value), 300),
+    debounce(e => setSearchTerm(e.target.value), 300),
     [],
   );
   // cleanup the debounced function when component umounts
@@ -128,7 +101,7 @@ export const Spells = () => {
     return () => {
       debouncedChangeHandler.cancel();
     };
-  }, []);
+  }, [debouncedChangeHandler]);
 
   const rowOpenSideEffects = () => {
     searchInputRef.current.blur();
@@ -148,22 +121,32 @@ export const Spells = () => {
               data={levels}
               onChange={id => setLevel(id)}
             />
-            <input
-              id="searchInput"
-              autoComplete="off"
-              className={styles.searchFilter}
-              ref={searchInputRef}
+            <IconContext.Provider
+              value={{
+                className: `${styles.icon} ${tablesOn && styles.active}`,
+              }}
+            >
+              <div>
+                <RxTable onClick={() => setTablesOn(!tablesOn)} />
+              </div>
+            </IconContext.Provider>
+
+            <MyInput
               onChange={debouncedChangeHandler}
+              _ref={searchInputRef}
+              closeClick={() => setSearchTerm(null)}
             />
           </div>
         </div>
         <div className={styles.body}>
           <div className={styles.container}>
-            <SpellList
-              key="spellList"
-              data={filterSpells()}
-              rowOpenSideEffects={rowOpenSideEffects}
-            />
+            {(!tablesOn && (
+              <SpellList
+                key="spellList"
+                data={filterSpells()}
+                rowOpenSideEffects={rowOpenSideEffects}
+              />
+            )) || <SpellSlots casterClassId={casterClass} />}
           </div>
         </div>
       </div>

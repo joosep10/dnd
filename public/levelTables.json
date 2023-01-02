@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Wizard",
+    "table": [
+      [
+        "Level",
+        "Proficency Bonus",
+        "Features",
+        "Cantrips Known",
+        "1st",
+        "2nd",
+        "3rd",
+        "4th",
+        "5th",
+        "6th",
+        "7th",
+        "8th",
+        "9th"
+      ],
+      [
+        "1st",
+        "+2",
+        "Spellcasting, Arcane Recovery",
+        "3",
+        "2",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "2nd",
+        "+2",
+        "Arcane Tradition",
+        "3",
+        "3",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "3rd",
+        "+2",
+        null,
+        "3",
+        "4",
+        "2",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "4th",
+        "+2",
+        "Ability Score Improvement",
+        "4",
+        "4",
+        "3",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "4th",
+        "+2",
+        "Ability Score Improvement",
+        "4",
+        "4",
+        "3",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      []
+    ]
+  }
+]

@@ -121,21 +121,21 @@ export const Spells = () => {
               data={levels}
               onChange={id => setLevel(id)}
             />
-            <IconContext.Provider
-              value={{
-                className: `${styles.icon} ${tablesOn && styles.active}`,
-              }}
-            >
-              <div>
+            <div className={styles.searchNStuff}>
+              <IconContext.Provider
+                value={{
+                  className: `${styles.icon} ${tablesOn && styles.active}`,
+                }}
+              >
                 <RxTable onClick={() => setTablesOn(!tablesOn)} />
-              </div>
-            </IconContext.Provider>
+              </IconContext.Provider>
 
-            <MyInput
-              onChange={debouncedChangeHandler}
-              _ref={searchInputRef}
-              closeClick={() => setSearchTerm(null)}
-            />
+              <MyInput
+                onChange={debouncedChangeHandler}
+                _ref={searchInputRef}
+                closeClick={() => setSearchTerm(null)}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.body}>

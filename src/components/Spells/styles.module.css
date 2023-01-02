@@ -37,12 +37,14 @@
   flex-direction: row;
   align-items: center;
 }
-.searchFilter {
-  height: 30px;
-  width: 20%;
-  font-size: 1rem;
-  border: 1px solid #cecece;
-  border-radius: 5px;
+.searchNStuff {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchNStuff > div:last-child {
+  margin-left: 10px;
 }
 .icon {
   cursor: pointer;
@@ -63,6 +65,7 @@
     align-items: center;
     flex-wrap: nowrap;
     flex-direction: column;
+    padding: 0 10px;
   }
   .searchFilter {
     /* display: none; */

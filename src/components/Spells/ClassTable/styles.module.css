@@ -4,7 +4,10 @@ table {
   border: 1px solid lightgray;
 }
 th {
-  background-color: var(--yellow);
+    background-color: rgb(240 99 99);
+    color: white;
+    font-weight: 400;
+    height: 43px;
 }
 td,
 th {

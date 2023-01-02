@@ -1,3 +1,4 @@
+// TODO: change the name of this damn thing
 import { useEffect, useState } from 'react';
 import { ClassTable } from 'components';
 
@@ -16,11 +17,10 @@ export const SpellSlots = ({ casterClassId }) => {
           return response.json();
         })
         .then(myJson => {
-          const t =
-            myJson[casterClassId]['Class Features'][
-              `The ${casterClassId}`
-            ]['table'];
-          console.log(t);
+          const classFeatures = myJson[casterClassId]['Class Features'];
+          const keys = Object.keys(classFeatures);
+          console.log('keys: ', keys);
+          const t = classFeatures[`The ${casterClassId}`]['table'];
           setTable(t);
         });
     }

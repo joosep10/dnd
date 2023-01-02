@@ -20,22 +20,28 @@ const columnsToRows = obj => {
 export const ClassTable = ({ table }) => {
   const arr = columnsToRows(table);
   const [head, ...body] = arr;
-  console.log(body);
   return (
     <table>
       <thead>
         <tr>
           {head.map(item => (
-            <th className={styles[item.toLowerCase()]}>{item}</th>
+            <th key={randomId()} className={styles[item.toLowerCase()]}>
+              {item}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {body.map(row => {
           return (
-            <tr>
+            <tr key={randomId()}>
               {row.map((item, idx) => (
-                <td className={styles[head[idx].toLowerCase()]}>{item}</td>
+                <td
+                  key={randomId()}
+                  className={styles[head[idx].toLowerCase()]}
+                >
+                  {item}
+                </td>
               ))}
             </tr>
           );

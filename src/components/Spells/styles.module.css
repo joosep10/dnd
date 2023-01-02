@@ -48,6 +48,11 @@
 }
 .icon {
   cursor: pointer;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.icon path {
+  fill: rgb(119, 119, 119);
 }
 .icon.active path {
   fill: var(--yellow);

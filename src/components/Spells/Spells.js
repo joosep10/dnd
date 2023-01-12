@@ -1,27 +1,32 @@
 import styles from './styles.module.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { MyInput, Options, SpellList, SpellSlots, LoginModal } from 'components';
+import {
+  MyInput,
+  Options,
+  SpellList,
+  SpellSlots,
+  LoginModal,
+} from 'components';
 import { fuzzyTestMatch, mySort } from 'helpers/helpers';
 import { RxTable } from 'react-icons/rx';
 import debounce from 'lodash.debounce';
 import { IconContext } from 'react-icons';
 import { createClient } from '@supabase/supabase-js';
-import {projectUrl, anonKey, casterClasses, levels} from 'lib/constants';
+import { projectUrl, anonKey, casterClasses, levels } from 'lib/constants';
 
 // Create a single supabase client for interacting with your database
 
+const something = 'other thing';
 const supabase = createClient(projectUrl, anonKey);
 
 export const Spells = () => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
   const [spells, setSpells] = useState(null);
   const [casterClass, setCasterClass] = useState(null);
   const [level, setLevel] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [tablesOn, setTablesOn] = useState(false);
   const searchInputRef = useRef(null);
-
-  
 
   // listen to escape key press
   useEffect(() => {
@@ -44,7 +49,7 @@ export const Spells = () => {
         .from('spells')
         .select()
         .order('level_nr')
-        .order('name')
+        .order('name');
       setSpells(data);
       console.log(error);
     };
@@ -110,7 +115,9 @@ export const Spells = () => {
               <div className={styles.searchNStuff}>
                 <IconContext.Provider
                   value={{
-                    className: `${styles.icon} ${tablesOn && styles.active}`,
+                    className: `${styles.icon} ${
+                      tablesOn && styles.active
+                    }`,
                   }}
                 >
                   <RxTable onClick={() => setTablesOn(!tablesOn)} />
@@ -121,7 +128,12 @@ export const Spells = () => {
                   _ref={searchInputRef}
                   closeClick={() => setSearchTerm(null)}
                 />
-                <div className={styles.login} onClick={() => setModalVisible(true)}>Login</div>
+                <div
+                  className={styles.login}
+                  onClick={() => setModalVisible(true)}
+                >
+                  Login
+                </div>
               </div>
             </div>
           </div>

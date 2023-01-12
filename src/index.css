@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --yellow: rgb(255, 217, 103);
   --background: rgb(255, 255, 255);
@@ -27,8 +31,13 @@ code {
     monospace;
 }
 div,
-input {
+input,
+header,
+footer {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+.icon {
+  cursor: pointer;
 }

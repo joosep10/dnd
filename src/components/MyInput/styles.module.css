@@ -10,7 +10,7 @@
 .inputWrapper.active {
   width: 200px;
 }
-input {
+.input {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -30,7 +30,7 @@ input {
 .active .closeIcon {
   display: block;
 }
-input:focus {
+.input:focus {
   outline: none !important;
   border: 1px solid var(--yellow);
 }

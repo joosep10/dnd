@@ -45,7 +45,7 @@ export const SpellRow = ({ data, handleClick, isOpen }) => {
 
           <div
             className={styles.description}
-            dangerouslySetInnerHTML={{ __html: data.desc }}
+            dangerouslySetInnerHTML={{ __html: data.description }}
           />
           {data.higher_level && (
             <div>

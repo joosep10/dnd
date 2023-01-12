@@ -4,3 +4,4 @@ export * from './Combat';
 export * from './SearchFilter';
 export * from './Options';
 export * from './MyInput';
+export * from './LoginModal';

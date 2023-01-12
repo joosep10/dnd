@@ -17,6 +17,7 @@ export const MyInput = ({ onChange, closeClick, _ref }) => {
       }`}
     >
       <input
+        className={styles.input}
         id="searchInput"
         autoComplete="off"
         placeholder="Search"

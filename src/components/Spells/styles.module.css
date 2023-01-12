@@ -43,8 +43,16 @@
   justify-content: space-between;
   align-items: center;
 }
+.searchNStuff > div {
+  margin-left: 1.4rem;
+}
 .searchNStuff > div:last-child {
-  margin-left: 10px;
+  margin-left: 1.4rem;
+}
+.login {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 .icon {
   cursor: pointer;
@@ -57,6 +65,7 @@
 .icon.active path {
   fill: var(--yellow);
 }
+
 
 @media screen and (max-width: 700px) {
   .body {
